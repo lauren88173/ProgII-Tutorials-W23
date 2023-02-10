@@ -6,12 +6,14 @@ public class Player_Movement : MonoBehaviour
 {
     //Movement Variables
     [SerializeField] float movementSpeed = 8f;
-    [SerializeField] float jumpSpeed = 10f;
     [SerializeField] float rotationSpeed = 30f;
+    public int jumpForce;
+    bool jump = false;
 
     //Movement Checks
-    [SerializeField] float distanceFromGround = 2f;
+   // [SerializeField] float distanceFromGround = 2f;
     [SerializeField] LayerMask ground;
+    bool playerIsGrounded;
 
     //Physics Variables
     float verticalInput;
@@ -22,9 +24,11 @@ public class Player_Movement : MonoBehaviour
         
 
 
-    /*bool jumpCommand;
-    bool playerIsGrounded;*/
+    
+    
     //Bullet Variables
+    
+
 
     void Start()
     {
@@ -36,13 +40,22 @@ public class Player_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+        PlayerMovement();
+        if (Input.GetButtonDown("Jump"))
+        {
+            jump = true;
+        }
+        
     }
 
     private void FixedUpdate()
     {
-        PlayerMovement();
-        PlayerJump();
+        
+        if(jump == true && playerIsGrounded == true)
+        {
+            PlayerJump();
+            jump = false;
+        }
         //Shoot();
     }
 
@@ -59,22 +72,19 @@ public class Player_Movement : MonoBehaviour
     {
         /*cant quite get the 'check for ground' to work, so for now im commenting it out so that jumping works, though it has no restrictions */
 
-        bool playerIsGrounded = Physics.Raycast(transform.position, Vector3.down, distanceFromGround, ground);
-        if (Input.GetKeyDown(KeyCode.Space) && playerIsGrounded)
-        {
-            rB.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-        }
+        /* bool playerIsGrounded = Physics.Raycast(transform.position, Vector3.down, distanceFromGround, ground);
+         if (Input.GetKeyDown(KeyCode.Space) && playerIsGrounded)
+         {
+             rB.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+         }*/
 
-        else if (Input.GetKeyDown(KeyCode.Space) && !playerIsGrounded)
-        {
-            jumpSpeed = 0;
-        }
-       
+        rB.AddForce(0, jumpForce, 0);
+        playerIsGrounded = false;
         
 
     }
 
-   /* private void OnCollisionEnter(Collision collision)
+  private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Ground")
         {
@@ -88,6 +98,6 @@ public class Player_Movement : MonoBehaviour
             }
         }
     }
-   */
+   
 
 }
