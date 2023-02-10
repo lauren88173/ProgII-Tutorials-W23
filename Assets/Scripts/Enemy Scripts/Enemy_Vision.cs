@@ -6,10 +6,6 @@ public class Enemy_Vision : Enemy_Behaviour
 {
     public GameObject target;
 
-    void Start()
-    {
-
-    }
 
     void Update()
     {

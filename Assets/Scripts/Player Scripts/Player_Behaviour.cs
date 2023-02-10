@@ -33,4 +33,9 @@ public class Player_Behaviour : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void DamagePlayer(int damage)
+    {
+        _playerHealth -= damage;
+    }
 }

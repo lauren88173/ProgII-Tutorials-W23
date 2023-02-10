@@ -7,21 +7,23 @@ public class Enemy_Behaviour : MonoBehaviour
 {
     [SerializeField] Transform trans;
     [SerializeField] GameObject bullet;
+    [SerializeField] float bulletSpeed = 100f;
    
-    //For following the player with their vision
-  /*  public GameObject target;
-
     void Start()
     {
-        
+        StartCoroutine(shoot());
     }
 
-    void Update()
+    IEnumerator shoot()
     {
-        Vector3 newPos = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
-        transform.LookAt(newPos);
-    }*/
-
+        while (true)
+        {
+            Rigidbody obj = Instantiate(bullet, trans.position, trans.rotation).GetComponent<Rigidbody>();
+            obj.velocity = trans.forward * bulletSpeed;
+            //returning value of time so that the bullets fire every x seconds. Makes it wait 5 seconds before firing instead of checking if its been 5 seconds
+            yield return new WaitForSeconds(5f);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -37,4 +39,6 @@ public class Enemy_Behaviour : MonoBehaviour
             Debug.Log("Player has left enemy range");
         }
     }
+
+   
 }

@@ -47,6 +47,6 @@ public class Bullet_Behaviour : MonoBehaviour
     {
         GameObject bulletSpawn = Instantiate(bullet, bulletPos.position, bullet.transform.rotation);
 
-        bulletSpawn.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, bulletVelocity);
+        bulletSpawn.GetComponent<Rigidbody>().velocity = bulletPos.forward * bulletVelocity;
     }
 }

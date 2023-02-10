@@ -53,9 +53,9 @@ public class Player_Movement : MonoBehaviour
         
         if(jump == true && playerIsGrounded == true)
         {
-            PlayerJump();
-            jump = false;
+            PlayerJump(); 
         }
+        jump = false;
         //Shoot();
     }
 
@@ -70,27 +70,20 @@ public class Player_Movement : MonoBehaviour
 
     void PlayerJump()
     {
-        /*cant quite get the 'check for ground' to work, so for now im commenting it out so that jumping works, though it has no restrictions */
-
-        /* bool playerIsGrounded = Physics.Raycast(transform.position, Vector3.down, distanceFromGround, ground);
-         if (Input.GetKeyDown(KeyCode.Space) && playerIsGrounded)
-         {
-             rB.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
-         }*/
-
-        rB.AddForce(0, jumpForce, 0);
+        
+        rB.AddForce(0, jumpForce, 0, ForceMode.Impulse);
         playerIsGrounded = false;
         
 
     }
-
-  private void OnCollisionEnter(Collision collision)
+    //stay instead of enter so its always checking if its on the ground
+  private void OnCollisionStay(Collision collision)
     {
         if (collision.collider.tag == "Ground")
         {
             for (int i = 0; i < collision.contacts.Length; i++)
             {
-                if (collision.contacts[i].normal.y > 1.5)
+                if (collision.GetContact(i).normal.y > 0.5)
                 {
                     playerIsGrounded = true;
                   
@@ -98,6 +91,11 @@ public class Player_Movement : MonoBehaviour
             }
         }
     }
-   
+    //when I leave touching any object, it sets grounded to false
+    private void OnCollisionExit(Collision collision)
+    {
+        playerIsGrounded = false;
+    }
+
 
 }
