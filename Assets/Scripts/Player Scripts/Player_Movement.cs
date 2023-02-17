@@ -65,7 +65,8 @@ public class Player_Movement : MonoBehaviour
         horizInput = Input.GetAxis("Horizontal") * rotationSpeed;
         transform.Rotate(Vector3.up * horizInput * Time.deltaTime);
         transform.Translate(Vector3.forward * verticalInput * Time.deltaTime);
-       
+        
+
     }
 
     void PlayerJump()

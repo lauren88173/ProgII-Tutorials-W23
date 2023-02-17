@@ -12,6 +12,7 @@ public class Coin_Behaviour : MonoBehaviour
         {
             Destroy(gameObject);
             Debug.Log("You have collected a coin!");
+            FindObjectOfType<AudioManager>().Play("Coin_Pickedup");
         }
     }
 

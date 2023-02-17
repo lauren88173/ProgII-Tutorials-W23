@@ -6,6 +6,9 @@ public class Player_Behaviour : MonoBehaviour
 {
     int _playerHealth = 28;
     bool _damagedByEnemy;
+
+    //Audio mamanger
+    
     void Start()
     {
         
@@ -17,6 +20,7 @@ public class Player_Behaviour : MonoBehaviour
         if (_playerHealth < 1)
         {
             PlayerDeath();
+            FindObjectOfType<AudioManager>().Play("Player_Dies");
         }
     }
 
@@ -32,6 +36,7 @@ public class Player_Behaviour : MonoBehaviour
     public void PlayerDeath()
     {
         Destroy(gameObject);
+       
     }
 
     public void DamagePlayer(int damage)
