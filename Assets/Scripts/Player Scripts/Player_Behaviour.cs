@@ -8,7 +8,15 @@ public class Player_Behaviour : MonoBehaviour
     bool _damagedByEnemy;
 
     //Audio mamanger
-    
+
+
+    [System.Serializable]
+    public class Inventory
+    {
+        public int coin;
+    }
+    [SerializeField] Inventory inventory = new Inventory();
+
     void Start()
     {
         
@@ -42,5 +50,15 @@ public class Player_Behaviour : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         _playerHealth -= damage;
+    }
+    public void AddCoin()
+    {
+        Debug.Log("Coin added to loot!");
+        inventory.coin++;
+    }
+    public void AddHealth()
+    {
+        Debug.Log("Player health recovered!");
+        _playerHealth++;
     }
 }
