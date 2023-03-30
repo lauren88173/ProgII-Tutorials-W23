@@ -10,7 +10,7 @@ public class Player_Behaviour : MonoBehaviour
     //Audio mamanger
 
 
-    [System.Serializable]
+    [System.Serializable] 
     public class Inventory
     {
         public int coin;
