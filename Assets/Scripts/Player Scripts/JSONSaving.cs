@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Events;
+using System.Text;
 
 public class JSONSaving : MonoBehaviour
 {
     private Player_Behaviour playerBehaviour;
 
-
+    //Encrypting Save Data, below is the key. Dont have to call it KeyWord if I dont want it to be obvious
+    private static readonly string keyWord = "1784573";
 
     void Start()
     {
@@ -17,8 +20,9 @@ public class JSONSaving : MonoBehaviour
     void Save()
     {
         string saveGame = JsonUtility.ToJson(playerBehaviour.gameObject.transform.position);
+        Encryption.EncryptSave()
         File.WriteAllText(Application.persistentDataPath + "/LaurensProgLab", saveGame);
-
+        
     }
 
     void Load()
@@ -30,7 +34,7 @@ public class JSONSaving : MonoBehaviour
         }
 
         string saveGame = File.ReadAllText(Application.persistentDataPath + "/LaurensProgLab");
-
+        Encryption.DecryptSave()
         playerBehaviour.gameObject.transform.position = JsonUtility.FromJson<Vector3>(saveGame);
     }
 
@@ -47,4 +51,6 @@ public class JSONSaving : MonoBehaviour
             Debug.Log("GameLoaded");
         }
     }
+
+
 }
