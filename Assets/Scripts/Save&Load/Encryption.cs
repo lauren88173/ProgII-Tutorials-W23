@@ -10,14 +10,14 @@ public class Encryption : MonoBehaviour
 {
     
 
-
+    
    public static string EncryptSave(string saveText, string password)
  {
      //using try makes it so that the game doesnt crash if it is unable to perform what is being asked
      try
      {//privateKey = passCode, privateKeyByte = passCodeByte, keyByte = codeByte
          //A key for reading and writing the encrypted data
-         string passCode = "3293745";
+         string passCode = "sdfhrtj";
          byte[] passCodeByte = { };
          passCodeByte = Encoding.UTF8.GetBytes(passCode);
          byte[] _codeByte = { };
@@ -41,7 +41,7 @@ public class Encryption : MonoBehaviour
     {
         try
         {
-            string passCode = "3293745";
+            string passCode = "sdfhrtj";
             byte[] passCodeByte = { };
             passCodeByte = Encoding.UTF8.GetBytes(passCode);
             byte[] _codeByte = { };
